@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
-import { TextField, Grid } from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Grid } from "@mui/material";
 
 interface CardInputProps {
-  onCardDetailsChange: (details: { cardNumber: string, expiry: string, cvc: string }) => void;
+  onCardDetailsChange: (details: {
+    cardNumber: string;
+    expiry: string;
+    cvc: string;
+  }) => void;
   loading: boolean;
 }
 
-const CardInput: React.FC<CardInputProps> = ({ onCardDetailsChange, loading }) => {
-  const [cardNumber, setCardNumber] = useState<string>('');
-  const [expiry, setExpiry] = useState<string>('');
-  const [cvc, setCvc] = useState<string>('');
+const CardInput: React.FC<CardInputProps> = ({
+  onCardDetailsChange,
+  loading,
+}) => {
+  const [cardNumber, setCardNumber] = useState<string>("");
+  const [expiry, setExpiry] = useState<string>("");
+  const [cvc, setCvc] = useState<string>("");
 
   const handleInputChange = () => {
     onCardDetailsChange({ cardNumber, expiry, cvc });

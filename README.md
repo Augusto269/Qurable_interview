@@ -28,7 +28,21 @@ This project uses a microservices architecture based on Docker, with a frontend 
 3. Run the following command to build and start the containers:
    ```bash
    docker-compose up --build
+   ```
 4. The frontend will be available at http://localhost:3000 and the backend at http://localhost:5001.
+
 ## Additional Notes
+
 The system uses Nodemon in the backend for a smoother development experience.
 The MongoDB database is located in the mongodb container, and you can interact with it from the backend using the connection defined in the environment variables.
+
+## Commits and Branches
+
+For new features, bug fixes, and other changes, please create a new branch and open a pull request to the main branch. The pull request should include a description of the changes and the issue it addresses.
+For commit , first :
+
+```bash
+npm i
+```
+
+To install the commitizen package to run prettier and format on commit.

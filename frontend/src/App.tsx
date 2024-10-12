@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
-import CheckoutScreen from './pages/Checkout/CheckoutScreen';
-import SummaryScreen from './pages/Summary/SummaryScreen';
-import { Box } from '@mui/material';
+import "./App.css";
+import CheckoutScreen from "./pages/Checkout/CheckoutScreen";
+import SummaryScreen from "./pages/Summary/SummaryScreen";
+import { Box } from "@mui/material";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +17,5 @@ const App: React.FC = () => {
     </Box>
   );
 };
-
 
 export default App;

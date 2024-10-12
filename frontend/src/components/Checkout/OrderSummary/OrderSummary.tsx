@@ -1,6 +1,6 @@
 // OrderSummaryItem.tsx
-import React from 'react';
-import { Typography, Box, Grid } from '@mui/material';
+import React from "react";
+import { Typography, Box, Grid } from "@mui/material";
 
 interface OrderSummaryItemProps {
   label?: string;
@@ -9,10 +9,13 @@ interface OrderSummaryItemProps {
   productName: string;
   subtotal: number;
   shipping: number;
-  discount: number; 
+  discount: number;
 }
 
-const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({ label, value }) => {
+const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({
+  label,
+  value,
+}) => {
   return (
     <Grid container justifyContent="space-between">
       <Grid item>
@@ -22,7 +25,7 @@ const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({ label, value }) => 
       </Grid>
       <Grid item>
         <Typography variant="body1">
-          {typeof value === 'number' ? `$${value.toFixed(2)}` : value}
+          {typeof value === "number" ? `$${value.toFixed(2)}` : value}
         </Typography>
       </Grid>
     </Grid>
