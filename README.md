@@ -30,6 +30,7 @@ This project uses a microservices architecture based on Docker, with a frontend 
    docker-compose up --build
    ```
 4. The frontend will be available at http://localhost:3000 and the backend at http://localhost:5001.
+5. Backend API documentation is available at http://localhost:5001/docs.
 
 ## Additional Notes
 
