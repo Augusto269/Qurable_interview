@@ -30,7 +30,6 @@ const SummaryScreen: React.FC<SummaryScreenProps> = ({
 
   const finalAmount = calculateFinalAmount(amount, discountPercent);
 
-  console.log(finalAmount);
   return (
     <Box
       p={3}

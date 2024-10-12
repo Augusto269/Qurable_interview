@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./App.css";
 import CheckoutScreen from "./pages/Checkout/CheckoutScreen";
@@ -30,9 +30,9 @@ const items = [
 ];
 
 const App: React.FC = () => {
+  const [discountPercent, setDiscountPercent] = useState<number>(10);
+
   const amount = items.reduce((acc, item) => acc + item.subtotal, 0);
-  console.log(amount);
-  const discount = 10;
   return (
     <Box display="flex" justifyContent="space-between" width="100%">
       <Box flex={1} p={2}>
@@ -41,7 +41,7 @@ const App: React.FC = () => {
       <Box flex={1} p={2}>
         <SummaryScreen
           amount={amount}
-          discountPercent={discount}
+          discountPercent={discountPercent}
           items={items}
         />
       </Box>
