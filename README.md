@@ -28,7 +28,7 @@ This project uses a microservices architecture based on Docker, with a frontend 
 3. Run the following command to build and start the containers:
    ```bash
    docker-compose up --build
-4. The frontend will be available at http://localhost:3000 and the backend at http://localhost:5000.
+4. The frontend will be available at http://localhost:3000 and the backend at http://localhost:5001.
 ## Additional Notes
 The system uses Nodemon in the backend for a smoother development experience.
 The MongoDB database is located in the mongodb container, and you can interact with it from the backend using the connection defined in the environment variables.
