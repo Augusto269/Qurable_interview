@@ -3,30 +3,46 @@ import React from "react";
 import { Typography, Box, Grid } from "@mui/material";
 
 interface OrderSummaryItemProps {
-  label?: string;
-  value?: string | number;
   size: string | number;
   productName: string;
   subtotal: number;
-  shipping: number;
+  shipping?: number;
   discount: number;
 }
 
 const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({
-  label,
-  value,
+  size,
+  productName,
+  subtotal,
+  shipping,
+  discount,
 }) => {
+  const discountAmount = (subtotal * discount) / 100;
+  const discountedSubtotal = subtotal - discountAmount;
+
   return (
-    <Grid container justifyContent="space-between">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
         <Typography variant="body1" color="textSecondary">
-          {label}
+          {productName} - Size: {size}
         </Typography>
       </Grid>
       <Grid item>
-        <Typography variant="body1">
-          {typeof value === "number" ? `$${value.toFixed(2)}` : value}
-        </Typography>
+        <Box>
+          <Typography
+            variant="body1"
+            style={{ textDecoration: "line-through", color: "red" }}
+          >
+            {typeof subtotal === "number"
+              ? `$${subtotal.toFixed(2)}`
+              : subtotal}
+          </Typography>
+          <Typography variant="body1">
+            {typeof discountedSubtotal === "number"
+              ? `$${discountedSubtotal.toFixed(2)}`
+              : discountedSubtotal}
+          </Typography>
+        </Box>
       </Grid>
     </Grid>
   );

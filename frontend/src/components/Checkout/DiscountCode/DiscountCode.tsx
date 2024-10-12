@@ -8,9 +8,15 @@ interface DiscountCodeProps {
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ onApply, isLoading }) => {
   const [code, setCode] = useState<string>("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+    setCode(inputValue.slice(0, 6));
+  };
 
   const handleApply = () => {
-    onApply(code);
+    if (code.length === 6) {
+      onApply(code);
+    }
   };
 
   return (
@@ -19,9 +25,11 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ onApply, isLoading }) => {
         label="Discount code"
         variant="outlined"
         value={code}
-        onChange={(e) => setCode(e.target.value)}
+        inputProps={{ maxLength: 6 }}
+        onChange={handleChange}
         sx={{ flex: 1, minWidth: "200px" }}
         margin="normal"
+        disabled={isLoading}
       />
       <Button
         variant="contained"

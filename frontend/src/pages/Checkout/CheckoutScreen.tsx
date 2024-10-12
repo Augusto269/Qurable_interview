@@ -40,12 +40,9 @@ const CheckoutScreen: React.FC = () => {
         valid credit card.
       </Typography>
 
-      <CardInput
-        onCardDetailsChange={handleCardDetailsChange}
-        loading={loading}
-      />
+      <CardInput onCardDetailsChange={handleCardDetailsChange} />
 
-      <DiscountCode onApply={handleApplyDiscountCode} />
+      <DiscountCode onApply={handleApplyDiscountCode} isLoading={loading} />
 
       <Button
         variant="contained"
