@@ -110,7 +110,7 @@ dist
 # Serverless directories
 .serverless/
 mongodb/
-
+mongo_data/
 # FuseBox cache
 .fusebox/
 

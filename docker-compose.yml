@@ -28,7 +28,7 @@ services:
       - /app/node_modules
     environment:
       #Hardcoded values for development and testing purposes
-      - MONGO_URL=mongodb://mongodb:27017/coupon_system
+      - MONGO_URL=mongodb://mongodb:27030/coupon_system
       - PRIVATE_KEY=22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712
       - NODE_ENV=development
     depends_on:
@@ -37,12 +37,24 @@ services:
       - app-network
 
   mongodb:
-    container_name: mongodb
-    image: mongo
-    ports:
-      - "27017:27017"
+    image: mongo:4.4
+    command:
+      [
+        "mongod",
+        "--dbpath",
+        "/data/db",
+        "--port",
+        "27030",
+        "--profile",
+        "1",
+        "--slowms",
+        "1",
+      ]
     volumes:
-      - ./mongodb:/data/db
+      - ./mongo_data:/data/db
+    container_name: mongodb
+    ports:
+      - "27030:27030"
     networks:
       - app-network
 

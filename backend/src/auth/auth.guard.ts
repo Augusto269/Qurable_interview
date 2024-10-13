@@ -20,8 +20,6 @@ export class AuthGuard implements CanActivate {
     const authHeader = request.headers['authorization'];
     const tokenValid = process.env.PRIVATE_KEY;
 
-    console.log('authHeader', authHeader);
-    console.log('tokenValid', tokenValid);
     if (!authHeader || authHeader !== tokenValid) {
       throw new UnauthorizedException('Unauthorized');
     }
