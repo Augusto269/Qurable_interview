@@ -1,7 +1,7 @@
 import { Connection } from 'mongoose';
 import { Discounts } from './discounts.schema';
 
-export const discountsProviders = [
+export const DiscountsProviders = [
   {
     provide: 'DISCOUNTS_MODEL',
     useFactory: (connection: Connection) =>

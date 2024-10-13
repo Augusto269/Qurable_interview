@@ -1,9 +1,9 @@
 import { Connection } from 'mongoose';
 import { SettingsDiscount } from './settings.schema';
 
-export const merchantProviders = [
+export const SettingsDiscountProviders = [
   {
-    provide: 'MERCHANTS_MODEL',
+    provide: 'SETTINGS_DISCOUNTS_MODEL',
     useFactory: (connection: Connection) =>
       connection.model('SettingsDiscounts', SettingsDiscount),
     inject: ['DATABASE_CONNECTION'],

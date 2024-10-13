@@ -1,7 +1,7 @@
 import { Connection } from 'mongoose';
 import { Merchant } from './merchant.schema';
 
-export const merchantProviders = [
+export const MerchantProviders = [
   {
     provide: 'MERCHANTS_MODEL',
     useFactory: (connection: Connection) =>

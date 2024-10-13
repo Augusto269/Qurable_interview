@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { MerchantInterface } from 'src/schemas/merchants/merchant.schema';
 
 @Injectable()
-export class DiscountsService {
+export class MerchantService {
   constructor(
     @Inject('MERCHANTS_MODEL')
     private discountModel: Model<MerchantInterface>,
@@ -17,6 +17,11 @@ export class DiscountsService {
 
   async findAll(): Promise<MerchantInterface[]> {
     return this.discountModel.find().exec();
+  }
+  async findByClientName(name: string): Promise<MerchantInterface | boolean> {
+    //Hardcode validation for now
+    return true;
+    return this.discountModel.findOne({ name: name });
   }
   async findOne(id: string): Promise<MerchantInterface | boolean> {
     //Hardcode validation for now

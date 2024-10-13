@@ -3,6 +3,8 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Query,
@@ -15,14 +17,25 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { RequestService } from 'src/services/request.service';
 import { UnprocessableEntityResponse } from 'src/commons/UnprocessableEntityResponse';
 import { SettingsCreateResponseType } from './SwaggerModels/SettingsResponse';
-import { SettingsCreateDiscountsRulesDto } from './settings.create-discounts-rules.dio';
+import {
+  SettingsCreateDiscountsRulesDto,
+  TypeOfRules,
+} from './settings.create-discounts-rules.dio';
+import { MerchantService } from 'src/services/databasServices/merchant.service';
+import { SettingsDiscountsService } from 'src/services/databasServices/settings.service';
+import { DiscountsInterfaceCreate } from 'src/schemas/discounts/discounts.schema';
+import { DiscountsService } from 'src/services/databasServices/disocunt.services';
+import { generateCoupon } from 'src/commons/Cupons.helper';
 
 @Controller('settings')
 export class SettingsController {
-  constructor(private readonly requestService: RequestService) {}
+  constructor(
+    private readonly merchantService: MerchantService,
+    private discountsService: DiscountsService,
+    private readonly settingsDiscountsService: SettingsDiscountsService,
+  ) {}
 
   @Post('discounts')
   @UseGuards(AuthGuard)
@@ -32,13 +45,39 @@ export class SettingsController {
   @ApiCreatedResponse({ type: SettingsCreateResponseType })
   public async createMerchantDiscountSettings(
     @Body(new ValidationPipe())
-    SettingsCreateDiscountsBody: SettingsCreateDiscountsRulesDto,
+    settingsCreateDiscountsBody: SettingsCreateDiscountsRulesDto,
   ) {
     try {
-      console.log('id', SettingsCreateDiscountsBody);
+      const merchantUser = await this.merchantService.findOne(
+        settingsCreateDiscountsBody.client,
+      );
+      if (!merchantUser) {
+        throw new HttpException('Merchant not found', HttpStatus.BAD_REQUEST);
+      }
+      if (!settingsCreateDiscountsBody.rules) {
+        //Default Rules
+        settingsCreateDiscountsBody.rules = TypeOfRules.purchase;
+      }
 
-      return;
-      ('ok');
-    } catch (err) {}
+      const newSettingsDiscount = await this.settingsDiscountsService.create(
+        settingsCreateDiscountsBody,
+      );
+      if (!newSettingsDiscount) {
+        throw new HttpException(
+          'Error creating discount settings',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      return newSettingsDiscount; // TBD Mapping for user response
+    } catch (err) {
+      if (err instanceof HttpException) {
+        throw err;
+      }
+      throw new HttpException(
+        'Error creating discount settings',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
