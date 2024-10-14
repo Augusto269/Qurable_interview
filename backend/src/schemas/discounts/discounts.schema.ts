@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 export const Discounts = new mongoose.Schema({
   settings_id: { type: String, required: true },
   client: { type: String, required: true },
-  coupon_discount: { type: String, required: true },
+  coupon_discount: { type: String, required: false },
   user_email: { type: String, required: true },
   percentage: { type: Number, required: true },
   type: { type: String, required: true },

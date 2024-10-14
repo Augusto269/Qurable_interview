@@ -10,8 +10,10 @@ services:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - PRIVATE_KEY=22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712
+      #Hardcoded values for development and testing purposes
+      - REACT_APP_PRIVATE_KEY=22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712
       - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:5001/
     depends_on:
       - backend
     networks:

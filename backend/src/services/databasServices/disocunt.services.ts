@@ -30,7 +30,17 @@ export class DiscountsService {
   }
 
   async findOneByCouponDiscount(coupon: string): Promise<DiscountsInterface> {
-    return this.discountModel.findOne({ coupon_discount: coupon });
+    const discount = await this.discountModel.findOne({
+      coupon_discount: coupon,
+    });
+    console.log(discount);
+    if (!discount) {
+      throw new HttpException('Coupon not exist', HttpStatus.BAD_REQUEST);
+    }
+    if (discount.usedAt && discount.usedFor) {
+      throw new HttpException('Coupon already used', HttpStatus.BAD_REQUEST);
+    }
+    return discount;
   }
   async findAll(): Promise<DiscountsInterface[]> {
     return this.discountModel.find().exec();

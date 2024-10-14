@@ -29,14 +29,16 @@ const OrderSummaryItem: React.FC<OrderSummaryItemProps> = ({
       </Grid>
       <Grid item>
         <Box>
-          <Typography
-            variant="body1"
-            style={{ textDecoration: "line-through", color: "red" }}
-          >
-            {typeof subtotal === "number"
-              ? `$${subtotal.toFixed(2)}`
-              : subtotal}
-          </Typography>
+          {discount > 0 && (
+            <Typography
+              variant="body1"
+              style={{ textDecoration: "line-through", color: "red" }}
+            >
+              {typeof subtotal === "number"
+                ? `$${subtotal.toFixed(2)}`
+                : subtotal}
+            </Typography>
+          )}
           <Typography variant="body1">
             {typeof discountedSubtotal === "number"
               ? `$${discountedSubtotal.toFixed(2)}`

@@ -44,6 +44,7 @@ export class PaymentCreateDto {
   })
   @MinLength(6)
   @MaxLength(6)
+  @IsOptional()
   @Expose()
   @ApiProperty({
     description: 'Discount coupon code',
@@ -65,9 +66,9 @@ export class PaymentCreateDto {
   })
   card_number: string;
 
-  @IsInt()
-  @Min(100)
-  @Max(999)
+  @IsString()
+  @MinLength(3)
+  @MaxLength(4)
   @Expose()
   @ApiProperty({
     description: 'CVV of the credit card',

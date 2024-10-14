@@ -35,7 +35,6 @@ export class ProductService {
     products: string[],
     discountDocument: DiscountsInterface,
   ): Promise<number> {
-    console.log(discountDocument);
     let totalAmount = 0;
     let totalDiscount = 0; // To accumulate discount values
 

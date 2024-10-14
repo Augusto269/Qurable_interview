@@ -10,9 +10,10 @@ interface CardInputProps {
 }
 
 const CardInput: React.FC<CardInputProps> = ({ onCardDetailsChange }) => {
-  const [cardNumber, setCardNumber] = useState<string>("");
-  const [expiry, setExpiry] = useState<string>("");
-  const [cvc, setCvc] = useState<string>("");
+  //Set the initial state of the card details for testing purposes
+  const [cardNumber, setCardNumber] = useState<string>("4242424242424242");
+  const [expiry, setExpiry] = useState<string>("12/33");
+  const [cvc, setCvc] = useState<string>("123");
 
   useEffect(() => {
     onCardDetailsChange({ cardNumber, expiry, cvc });

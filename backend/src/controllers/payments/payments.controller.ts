@@ -87,14 +87,16 @@ export class PaymentsController {
 
       return {
         amountPayed: calculateFinalAmount, //TB change for the amount payed in the paymentCharge callback response
-        coupon_discount: couponDiscount?.coupon_discount,
-        percentage_discount: couponDiscount?.percentage,
+        coupon_discount: {
+          discount_code: couponDiscount?.coupon_discount,
+          percentage_discount: couponDiscount?.percentage,
+          type: couponDiscount?.type,
+        },
       };
     } catch (err) {
       if (err instanceof HttpException) {
         throw err;
       }
-      console.log(err);
       throw new HttpException(
         'Error creating payments',
         HttpStatus.INTERNAL_SERVER_ERROR,

@@ -33,10 +33,6 @@ export class DiscountsController {
   public async getDiscounts(@Param(new ValidationPipe()) { id }: GetDiscounts) {
     try {
       const discount = await this.discountService.findOneByCouponDiscount(id);
-      console.log('discount', discount);
-      if (!discount) {
-        throw new HttpException('Discount not found', HttpStatus.BAD_REQUEST);
-      }
 
       return discount;
     } catch (err) {

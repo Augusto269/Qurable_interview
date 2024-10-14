@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button, Box, CircularProgress } from "@mui/material";
 
 interface DiscountCodeProps {
   onApply: (code: string) => void;
   isLoading?: boolean;
+  discountApply?: boolean;
 }
 
-const DiscountCode: React.FC<DiscountCodeProps> = ({ onApply, isLoading }) => {
+const DiscountCode: React.FC<DiscountCodeProps> = ({
+  onApply,
+  isLoading,
+  discountApply,
+}) => {
   const [code, setCode] = useState<string>("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
     setCode(inputValue.slice(0, 6));
   };
+
+  useEffect(() => {
+    if (!discountApply) {
+      setCode("");
+    }
+  }, [discountApply]);
 
   const handleApply = () => {
     if (code.length === 6) {

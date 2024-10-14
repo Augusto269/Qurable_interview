@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import TotalAmount from "../../../components/Checkout/TotalAmount/TotalAmount";
 import OrderSummaryItem from "../../../components/Checkout/OrderSummary/OrderSummary";
 
-interface ItemsProps {
+export interface ItemsProps {
   size: string;
   id: string;
   productName: string;
