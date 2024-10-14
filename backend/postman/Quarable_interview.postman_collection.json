@@ -1,0 +1,97 @@
+{
+  "info": {
+    "_postman_id": "8fcfb263-0b1e-49e7-861e-f9c6614e76f2",
+    "name": "Quarable_interview",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "9327807"
+  },
+  "item": [
+    {
+      "name": "Get Cupon Data",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5001/discounts/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["discounts", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "A2AB1A"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Settings Cupon Discounts",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"client\":\"qurable_merchant\",\n    \"max_discounts_tickets\": 1,\n    \"percentage\":5,\n    \"type\":\"all\",\n    \"rules\":\"purchase\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/settings/discounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["settings", "discounts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "22c8052a1a03a9c674b9b5012161b57f5101b621f70105573b1dfde7a723a712",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"user\": \"augusto@testings.com\",\n    \"amount\": 123.3,\n    \"coupon_discount\": \"A2AB1A\",\n    \"card_number\": \"4242424242424242\",\n    \"cvv\": \"123\",\n    \"expirate_day\": \"12/33\",\n    \"products_id\": [\n        \"product1\",\n        \"product2\",\n        \"product3\"\n    ],\n    \"client\": \"qurable_merchant\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/payments",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["payments"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

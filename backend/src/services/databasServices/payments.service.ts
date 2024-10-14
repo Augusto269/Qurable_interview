@@ -12,9 +12,8 @@ export class PaymentsService {
     private discountModel: Model<DiscountsInterface>,
   ) {}
 
-  async create(
-    bodyCreateRules: DiscountsInterfaceCreate,
-  ): Promise<DiscountsInterface> {
+  async create(bodyCreateRules: any): Promise<DiscountsInterface | boolean> {
+    return true;
     const createdCat = new this.discountModel(bodyCreateRules);
     return createdCat.save();
   }

@@ -41,6 +41,8 @@ export class DatabaseModule implements OnModuleInit {
         const newSettings = await this.settingsDiscountModel.create({
           client: 'qurable_merchant',
           max_discounts_tickets: 2,
+          left_discounts_tickets: 1,
+          percentage: 10,
           type: 'all',
           rules: TypeOfRules.purchase,
         });
@@ -56,13 +58,8 @@ export class DatabaseModule implements OnModuleInit {
         await this.discountsModel.create({
           settings_id: newSettings._id,
           client: newSettings.client,
+          coupon_discount: 'A2AB1A',
           percentage: 10,
-          type: 'all',
-        });
-        await this.discountsModel.create({
-          settings_id: newSettings._id,
-          client: newSettings.client,
-          percentage: 20,
           type: 'all',
         });
         console.log('Discount document created');

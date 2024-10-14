@@ -33,7 +33,6 @@ export class DiscountsService {
     const discount = await this.discountModel.findOne({
       coupon_discount: coupon,
     });
-    console.log(discount);
     if (!discount) {
       throw new HttpException('Coupon not exist', HttpStatus.BAD_REQUEST);
     }
@@ -79,7 +78,6 @@ export class DiscountsService {
   }
 
   async applyRulesToGenerateDiscountGiftCard(
-    coupon_discount: string,
     user?: string,
     client?: string,
   ): Promise<DiscountsInterfaceCreate | null> {

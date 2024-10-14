@@ -24,7 +24,7 @@ import { PaymentsService } from 'src/services/databasServices/payments.service';
 import { ProductService } from 'src/services/databasServices/products.service';
 import { DiscountsService } from 'src/services/databasServices/disocunt.services';
 import { GatewayService } from 'src/services/databasServices/gateywa.service';
-import { DiscountsInterfaceCreate } from 'src/schemas/discounts/discounts.schema';
+import { MailService } from 'src/services/databasServices/mailServices';
 
 @Controller('payments')
 export class PaymentsController {
@@ -33,6 +33,7 @@ export class PaymentsController {
     private readonly productService: ProductService,
     private readonly discountService: DiscountsService,
     private readonly gatewayService: GatewayService,
+    private readonly mailService: MailService,
   ) {}
 
   @Post('')
@@ -68,6 +69,9 @@ export class PaymentsController {
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
+      const orderCreated = await this.paymentsService.create({
+        ...paymentBody,
+      }); //Created Order
       if (discountDocument) {
         //Deprecate the coupon
         await this.discountService.useDiscount(
@@ -79,9 +83,9 @@ export class PaymentsController {
         await this.discountService.applyRulesToGenerateDiscountGiftCard(
           paymentBody.coupon_discount,
           paymentBody.user,
-          paymentBody.client,
         );
       if (couponDiscount) {
+        this.mailService.sendMail(couponDiscount);
         //Send this couponDiscount to the client to the email asociated to the user
       }
 

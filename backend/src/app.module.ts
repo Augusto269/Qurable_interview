@@ -14,6 +14,7 @@ import { PaymentsController } from './controllers/payments/payments.controller';
 import { PaymentsService } from './services/databasServices/payments.service';
 import { ProductService } from './services/databasServices/products.service';
 import { GatewayService } from './services/databasServices/gateywa.service';
+import { MailService } from './services/databasServices/mailServices';
 
 @Module({
   imports: [DatabaseModule],
@@ -23,6 +24,7 @@ import { GatewayService } from './services/databasServices/gateywa.service';
     MerchantService,
     PaymentsService,
     GatewayService,
+    MailService,
     ProductService,
     ...MerchantProviders,
     DiscountsService,
