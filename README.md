@@ -47,3 +47,48 @@ npm i
 ```
 
 To install the commitizen package to run prettier and format on commit.
+
+# Project Functionality
+First, you need to start the servers and the database with:
+
+```bash
+docker compose build
+docker-compose up
+```
+
+After this, the frontend will be available at [http://localhost:3000/](http://localhost:3000/) and the backend hosted at [http://localhost:5001](http://localhost:5001). The database will be running at `localhost:27030`.
+
+For demonstration purposes, a migration runs when the repository starts, and if there are no existing data, it creates a "Rule settings discounts" for a merchant. This setup allows for the generation of only two tickets, aside from the one that will be used. On the third purchase, no discount ticket (gift card) will be generated, and an already generated discount ticket (A2AB1A) will be utilized.
+
+## How to Use
+
+Go to the frontend, where you will find a card and a mock purchase already configured. Enter the Discount code (maximum length of 6 digits) and click on "Pay Now." You will be redirected to a resume page that displays the final amount paid (with or without a discount) and whether a ticket was generated. Additionally, an email with the ticket should be sent to the user if the rules are satisfied.
+
+## Considerations for the Project
+
+- The goal is to create dynamic rules so that multiple merchants can generate flexible rules for their marketing campaigns. An endpoint should also be generated to allow them to send these coupons to their customers.
+- Each discount contains the details of the user utilized.
+- There is a need for logic to handle new users and the associated number of tickets.
+
+## Possible Improvements
+
+### Frontend
+- User validations and feedback
+- Enhanced styling
+- Responsive design
+- Testing
+- Interface improvements corresponding to backend callbacks
+
+### Backend
+- Improved validations for both DIo and schemas
+- Finalize mock services
+- Coupon generation for merchants or campaign creators, including a public endpoint for generating along with customer emails
+- Implementation of discount limits or user logic
+- Generation of reports for merchants
+- Implement discount logic and payment orders with real products (create models and services)
+- Refactoring and improvements in implementation code, including example providers
+- Enhanced security (currently, keys are hardcoded, but there should be middleware, different users, and logging information)
+- Information and error logging examples (e.g., New Relic)
+- Better documentation (more accurate response and request details) - Swagger
+- Integration and unit testing
+- Interface enhancements
