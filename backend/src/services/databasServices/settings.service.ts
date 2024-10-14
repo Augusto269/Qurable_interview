@@ -20,6 +20,7 @@ export class SettingsDiscountsService {
     if (existingDiscount) {
       throw new HttpException('Coupon already exists', HttpStatus.BAD_REQUEST);
     }
+    //We have to attach the client.id to the discount, for testing propose we are using the client name
     const createSettings = new this.discountModel(createDiscountsDTO);
     return createSettings.save();
   }
@@ -29,5 +30,29 @@ export class SettingsDiscountsService {
   }
   async findOne(id: string): Promise<SettingsDiscountInterface> {
     return this.discountModel.findOne({ _id: id });
+  }
+  async findOneByClientRules(
+    client: string,
+    rules?: string,
+  ): Promise<SettingsDiscountInterface> {
+    return await this.discountModel
+      .findOne({
+        client,
+        rules,
+        left_discounts_tickets: { $gt: 0 },
+      })
+      .sort({ createdAt: -1 })
+      .exec();
+  }
+
+  async decrementLeftDiscountsTickets(
+    id: string,
+  ): Promise<SettingsDiscountInterface> {
+    return this.discountModel
+      .findByIdAndUpdate(
+        id,
+        { $inc: { left_discounts_tickets: -1 } }, // Decrement left_discounts_tickets by 1
+      )
+      .exec();
   }
 }

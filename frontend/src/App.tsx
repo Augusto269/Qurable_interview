@@ -2,28 +2,31 @@ import React, { useState } from "react";
 
 import "./App.css";
 import CheckoutScreen from "./pages/Checkout/CheckoutScreen";
-import SummaryScreen from "./pages/Summary/SummaryScreen";
 import { Box } from "@mui/material";
+import SummaryScreen from "./pages/Checkout/Summary/SummaryScreen";
 
-const items = [
+const productsMocked = [
   {
     size: "M",
+    id: "product1",
     productName: "T-Shirt",
-    subtotal: 25.0,
+    amount: 25.0,
     shipping: 5.0,
     type: "shirt",
   },
   {
     size: "L",
+    id: "product2",
     productName: "Jeans",
-    subtotal: 50.0,
+    amount: 50.0,
     shipping: 7.0,
     type: "pants",
   },
   {
     size: "S",
+    id: "product3",
     productName: "Sneakers",
-    subtotal: 70.0,
+    amount: 70.0,
     shipping: 10.0,
     type: "shoes",
   },
@@ -32,7 +35,7 @@ const items = [
 const App: React.FC = () => {
   const [discountPercent, setDiscountPercent] = useState<number>(10);
 
-  const amount = items.reduce((acc, item) => acc + item.subtotal, 0);
+  const amount = productsMocked.reduce((acc, item) => acc + item.amount, 0);
   return (
     <Box display="flex" justifyContent="space-between" width="100%">
       <Box flex={1} p={2}>
@@ -42,7 +45,7 @@ const App: React.FC = () => {
         <SummaryScreen
           amount={amount}
           discountPercent={discountPercent}
-          items={items}
+          productsMocked={productsMocked}
         />
       </Box>
     </Box>

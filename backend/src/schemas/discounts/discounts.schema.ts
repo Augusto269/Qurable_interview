@@ -17,6 +17,7 @@ export interface DiscountsInterfaceCreate {
   settings_id: string;
   client: string;
   coupon_discount: string;
+  user_email?: string;
   usedAt?: Date;
   usedFor?: string;
   percentage: number;
@@ -26,6 +27,7 @@ export interface DiscountsInterfaceCreate {
 export interface DiscountsInterface extends mongoose.Document {
   settings_id: string;
   client: string;
+  user_email?: string;
   coupon_discount: string;
   percentage: number;
   usedAt?: Date;

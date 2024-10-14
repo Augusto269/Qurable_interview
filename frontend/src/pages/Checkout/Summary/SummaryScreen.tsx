@@ -1,22 +1,23 @@
 import React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import TotalAmount from "../../components/Checkout/TotalAmount/TotalAmount";
-import OrderSummary from "../../components/Checkout/OrderSummary/OrderSummary";
-import OrderSummaryItem from "../../components/Checkout/OrderSummary/OrderSummary";
+import TotalAmount from "../../../components/Checkout/TotalAmount/TotalAmount";
+import OrderSummaryItem from "../../../components/Checkout/OrderSummary/OrderSummary";
 
 interface ItemsProps {
   size: string;
+  id: string;
   productName: string;
-  subtotal: number;
+  amount: number;
+  type: string;
   shipping: number;
 }
 interface SummaryScreenProps {
   amount: number;
-  items: ItemsProps[];
+  productsMocked: ItemsProps[];
   discountPercent: number;
 }
 const SummaryScreen: React.FC<SummaryScreenProps> = ({
-  items,
+  productsMocked,
   amount,
   discountPercent,
 }) => {
@@ -65,13 +66,13 @@ const SummaryScreen: React.FC<SummaryScreenProps> = ({
       )}
       <Divider />
       <Grid container direction="column" spacing={2}>
-        {items.map((item, index) => (
-          <Grid item key={index}>
+        {productsMocked.map((product, index) => (
+          <Grid key={index}>
             <OrderSummaryItem
-              size={item.size}
-              productName={item.productName}
-              subtotal={item.subtotal}
-              shipping={item.shipping}
+              size={product.size}
+              productName={product.productName}
+              subtotal={product.amount}
+              shipping={product.shipping}
               discount={discountPercent}
             />
           </Grid>

@@ -57,14 +57,12 @@ export class DatabaseModule implements OnModuleInit {
           settings_id: newSettings._id,
           client: newSettings.client,
           percentage: 10,
-          coupon_discount: '10OFF0',
           type: 'all',
         });
         await this.discountsModel.create({
           settings_id: newSettings._id,
           client: newSettings.client,
           percentage: 20,
-          coupon_discount: '20OFF0',
           type: 'all',
         });
         console.log('Discount document created');

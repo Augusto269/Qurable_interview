@@ -86,17 +86,4 @@ export class SettingsCreateDiscountsRulesDto {
     example: TypeOfRules.new_user,
   })
   rules?: TypeOfRules;
-
-  @IsString()
-  @MinLength(6)
-  @MaxLength(6)
-  @Expose()
-  @ApiProperty({
-    description: `Cupon discount`,
-    type: 'string',
-    maxLength: 6,
-    minLength: 6,
-    example: 'qurable_merchant',
-  })
-  coupon_discount: string;
 }

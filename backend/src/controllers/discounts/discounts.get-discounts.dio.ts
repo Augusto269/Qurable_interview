@@ -1,10 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, Matches } from 'class-validator';
 
 export class GetDiscounts {
   @IsString()
   @IsOptional()
+  @Matches(/^[A-Z0-9]+$/, {
+    message: 'coupon_discount must be alphanumeric and uppercase',
+  })
   @Expose()
   @ApiProperty({
     description: `Identifier of Discounts`,
